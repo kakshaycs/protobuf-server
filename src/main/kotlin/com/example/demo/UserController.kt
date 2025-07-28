@@ -46,10 +46,10 @@ class UserController {
             "name" to "John Doe",
             "email" to "john.doe@example.com",
             "age" to 30,
-            "is_active" to true,
-            "account_balance" to 12345.67,
-            "user_type" to "ADMIN",
-            "phone_numbers" to listOf("+1234567890", "+0987654321"),
+            "isActive" to true,
+            "accountBalance" to 12345.67,
+            "userType" to "ADMIN",
+            "phoneNumbers" to listOf("+1234567890", "+0987654321"),
             "profile_picture" to listOf(1,2,3,4,5), // Represent bytes as list of ints for JSON
             "address" to "123 Main St, Anytown, USA"
         )
