@@ -3,6 +3,7 @@ plugins {
 	id 'org.jetbrains.kotlin.plugin.spring' version '1.9.25'
 	id 'org.springframework.boot' version '3.4.0'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'com.google.protobuf' version '0.9.4'
 }
 
 group = 'com.example'
@@ -25,6 +26,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'com.google.protobuf:protobuf-java:3.25.3'
 }
 
 kotlin {
@@ -35,4 +37,21 @@ kotlin {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.3"
+    }
+    // Remove or comment out generatedFilesBaseDir unless you have a strong reason to change the default
+    // generatedFilesBaseDir = "$projectDir/src/generated"
+}
+
+sourceSets {
+    main {
+        java {
+            // Use the default output directory for generated Java code
+            srcDirs += "$projectDir/build/generated/source/proto/main/java"
+        }
+    }
 }

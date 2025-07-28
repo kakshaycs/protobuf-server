@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package user;
+
+option java_package = "com.example.demo.proto";
+option java_outer_classname = "UserDetailsProto";
+
+message UserDetails {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  bool is_active = 5;
+  double account_balance = 6;
+  UserType user_type = 7;
+  repeated string phone_numbers = 8;
+  bytes profile_picture = 9;
+  string address = 10;
+}
+
+enum UserType {
+  UNKNOWN = 0;
+  ADMIN = 1;
+  CUSTOMER = 2;
+  GUEST = 3;
+} 
