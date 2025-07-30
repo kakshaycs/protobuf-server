@@ -38,6 +38,53 @@ class UserController {
             .body(userDetails.toByteArray())
     }
 
+
+    @GetMapping("/users/protobuf", produces = ["application/x-protobuf"])
+    fun getUserListProtobuf(response: HttpServletResponse): ResponseEntity<ByteArray> {
+        // Build a hardcoded UserDetails object
+        val userDetails = UserDetailsProto.UserDetails.newBuilder()
+            .setId(123456789L)
+            .setName("John Doe")
+            .setEmail("john.doe@example.com")
+            .setAge(30)
+            .setIsActive(true)
+            .setAccountBalance(12345.67)
+            .setUserType(UserDetailsProto.UserType.ADMIN)
+            .addPhoneNumbers("+1234567890")
+            .addPhoneNumbers("+0987654321")
+            .setProfilePicture(com.google.protobuf.ByteString.copyFrom(byteArrayOf(1, 2, 3, 4, 5)))
+            .setAddress("123 Main St, Anytown, USA")
+            .build()
+
+        val userDetails2 = UserDetailsProto.UserDetails.newBuilder()
+            .setId(123456789L)
+            .setName("John Doe")
+            .setEmail("john.doe@example.com")
+            .setAge(30)
+            .setIsActive(true)
+            .setAccountBalance(12345.67)
+            .setUserType(UserDetailsProto.UserType.ADMIN)
+            .addPhoneNumbers("+1234567890")
+            .addPhoneNumbers("+0987654321")
+            .setProfilePicture(com.google.protobuf.ByteString.copyFrom(byteArrayOf(1, 2, 3, 4, 5)))
+            .setAddress("123 Main St, Anytown, USA")
+            .build()
+
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.parseMediaType("application/x-protobuf")
+
+        // Placeholder: Here you could call an external URL and parse the protobuf response
+        // TODO: Integrate with external server/client
+
+        val response = UserDetailsProto.UserDetailsList.newBuilder()
+            .addAllUserDetails(listOf(userDetails, userDetails2))
+            .build()
+
+        return ResponseEntity.ok()
+            .headers(headers)
+            .body(response.toByteArray())
+    }
+
     @GetMapping("/user/json", produces = ["application/json"])
     fun getUserJson(): Map<String, Any> {
         // Return the same data as a JSON-compatible map
